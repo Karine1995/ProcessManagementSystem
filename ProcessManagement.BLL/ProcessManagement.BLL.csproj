@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="IdentityModel" Version="5.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProcessManagement.Common\ProcessManagement.Common.csproj" PrivateAssets="All" />
+    <ProjectReference Include="..\ProcessManagement.DAL\ProcessManagement.DAL.csproj" PrivateAssets="All" />
+    <ProjectReference Include="..\ProcessManagement.DTOs\ProcessManagement.DTOs.csproj" PrivateAssets="All" />
+    <ProjectReference Include="..\ProcessManagement.Entities\ProcessManagement.Entities.csproj" PrivateAssets="All" />
+    <ProjectReference Include="..\ProcessManagement.Mappers\ProcessManagement.Mappers.csproj" PrivateAssets="All" />
+  </ItemGroup>
+
+</Project>

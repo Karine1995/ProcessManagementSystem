@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31229.75
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessManagementAPI", "ProcessManagementAPI\ProcessManagementAPI.csproj", "{BF07137A-940D-4F05-A720-92E8B47380DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessManagement.BLL", "ProcessManagement.BLL\ProcessManagement.BLL.csproj", "{22AD69AC-6ED1-44C7-8F3C-D9E534886FF3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessManagement.DAL", "ProcessManagement.DAL\ProcessManagement.DAL.csproj", "{BF54A8B4-6740-4BC8-A1F2-393D1F4D90EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessManagement.Common", "ProcessManagement.Common\ProcessManagement.Common.csproj", "{6480490A-CCDB-43CB-83E8-C737B45E09B1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessManagement.Validators", "ProcessManagement.Validators\ProcessManagement.Validators.csproj", "{93458648-3D7F-4399-B310-34CC33C00F2F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessManagement.Entities", "ProcessManagement.Entities\ProcessManagement.Entities.csproj", "{B7AA15F2-6430-4AFC-AA66-2A950DDEFD79}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessManagement.DTOs", "ProcessManagement.DTOs\ProcessManagement.DTOs.csproj", "{AEB84750-D0CF-47DA-896F-2F14A7950617}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessManagement.ViewModels", "ProcessManagement.ViewModels\ProcessManagement.ViewModels.csproj", "{42FACB34-7C82-4C17-8EFE-D3C91B799F4D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessManagement.Mappers", "ProcessManagement.Mappers\ProcessManagement.Mappers.csproj", "{7D06B4C2-E3D0-4B88-A3A2-2A94C84A0770}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessManagement.IdentityServer4", "ProcessManagement.IdentityServer4\ProcessManagement.IdentityServer4.csproj", "{CC0B2645-89FB-4799-96C2-769795945787}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF07137A-940D-4F05-A720-92E8B47380DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF07137A-940D-4F05-A720-92E8B47380DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF07137A-940D-4F05-A720-92E8B47380DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF07137A-940D-4F05-A720-92E8B47380DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22AD69AC-6ED1-44C7-8F3C-D9E534886FF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22AD69AC-6ED1-44C7-8F3C-D9E534886FF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22AD69AC-6ED1-44C7-8F3C-D9E534886FF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22AD69AC-6ED1-44C7-8F3C-D9E534886FF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF54A8B4-6740-4BC8-A1F2-393D1F4D90EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF54A8B4-6740-4BC8-A1F2-393D1F4D90EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF54A8B4-6740-4BC8-A1F2-393D1F4D90EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF54A8B4-6740-4BC8-A1F2-393D1F4D90EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6480490A-CCDB-43CB-83E8-C737B45E09B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6480490A-CCDB-43CB-83E8-C737B45E09B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6480490A-CCDB-43CB-83E8-C737B45E09B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6480490A-CCDB-43CB-83E8-C737B45E09B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93458648-3D7F-4399-B310-34CC33C00F2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93458648-3D7F-4399-B310-34CC33C00F2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93458648-3D7F-4399-B310-34CC33C00F2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93458648-3D7F-4399-B310-34CC33C00F2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7AA15F2-6430-4AFC-AA66-2A950DDEFD79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7AA15F2-6430-4AFC-AA66-2A950DDEFD79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7AA15F2-6430-4AFC-AA66-2A950DDEFD79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7AA15F2-6430-4AFC-AA66-2A950DDEFD79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEB84750-D0CF-47DA-896F-2F14A7950617}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEB84750-D0CF-47DA-896F-2F14A7950617}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEB84750-D0CF-47DA-896F-2F14A7950617}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEB84750-D0CF-47DA-896F-2F14A7950617}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42FACB34-7C82-4C17-8EFE-D3C91B799F4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42FACB34-7C82-4C17-8EFE-D3C91B799F4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42FACB34-7C82-4C17-8EFE-D3C91B799F4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42FACB34-7C82-4C17-8EFE-D3C91B799F4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D06B4C2-E3D0-4B88-A3A2-2A94C84A0770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D06B4C2-E3D0-4B88-A3A2-2A94C84A0770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D06B4C2-E3D0-4B88-A3A2-2A94C84A0770}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D06B4C2-E3D0-4B88-A3A2-2A94C84A0770}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC0B2645-89FB-4799-96C2-769795945787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC0B2645-89FB-4799-96C2-769795945787}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC0B2645-89FB-4799-96C2-769795945787}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC0B2645-89FB-4799-96C2-769795945787}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {696D2DE2-46DD-402B-8234-ED772C7A9871}
+	EndGlobalSection
+EndGlobal

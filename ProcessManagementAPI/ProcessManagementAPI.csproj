@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Projects\ProcessManagementSystem\ProcessManagementSystem\ProcessManagementAPI\ProcessManagementAPI.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.2.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProcessManagement.BLL\ProcessManagement.BLL.csproj" />
+    <ProjectReference Include="..\ProcessManagement.Common\ProcessManagement.Common.csproj" />
+    <ProjectReference Include="..\ProcessManagement.DTOs\ProcessManagement.DTOs.csproj" />
+    <ProjectReference Include="..\ProcessManagement.Mappers\ProcessManagement.Mappers.csproj" />
+    <ProjectReference Include="..\ProcessManagement.Validators\ProcessManagement.Validators.csproj" />
+    <ProjectReference Include="..\ProcessManagement.ViewModels\ProcessManagement.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>
