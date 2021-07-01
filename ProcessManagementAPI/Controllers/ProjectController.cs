@@ -35,5 +35,18 @@ namespace ProcessManagementAPI.Controllers
 
             return Ok("Project successfully added");
         }
+
+        /// <summary>
+        /// Get Project by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetProject(int id)
+        {
+            var result = await ServiceFactory.ProjectService.GetByIdAsync(id);
+
+            return Ok(result);
+        }
     }
 }

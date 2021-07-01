@@ -33,10 +33,11 @@ namespace ProcessManagement.BLL.Services.Implementations
 
         public async Task<UserDTO> UpdateAsync(UpdateUserInput updateTeamInput)
         {
-            var Team = updateTeamInput.MapTo<User>();
-           // var validator = new UpdateUserValidator(DbContext);
+            var user = updateTeamInput.MapTo<User>();
+            //var validator = new UpdateUserValidator(DbContext);
+            //await validator.ValidateAsync(user);
 
-            var user = DbContext.Users.First(a => a.Id == updateTeamInput.UserId);
+            user = DbContext.Users.First(a => a.Id == updateTeamInput.UserId);
             user.TeamId = updateTeamInput.TeamId;
             await DbContext.SaveChangesAsync();
 
@@ -45,10 +46,11 @@ namespace ProcessManagement.BLL.Services.Implementations
 
         public async Task<UserDTO> DeleteAsync(DeleteUserInput deleteTeamInput)
         {
-            var Team = deleteTeamInput.MapTo<User>();
-            // var validator = new DeleteteUserValidator(DbContext);
+            var user = deleteTeamInput.MapTo<User>();
+            var validator = new DeleteUserValidator(DbContext);
+            await validator.ValidateAsync(user);
 
-            var user = DbContext.Users.First(a => a.Id == deleteTeamInput.UserId);
+            user = DbContext.Users.First(a => a.Id == deleteTeamInput.UserId);
             user.TeamId = null;
             await DbContext.SaveChangesAsync();
 

@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProcessManagement.Entities.Models;
+using Microsoft.EntityFrameworkCore;
+using ProcessManagement.Common.Enumerations;
 
 namespace ProcessManagement.BLL.Services.Implementations
 {
@@ -31,6 +33,26 @@ namespace ProcessManagement.BLL.Services.Implementations
             await DbContext.SaveChangesAsync();
 
             return Assignment.MapTo<AssignmentDTO>();
+        }
+
+        public async Task<AssignmentDTO> GetByIdAsync(int id)
+        {
+            var assignment = await DbContext.Assignments.FirstOrDefaultAsync(m => m.Id == id);           
+
+            return assignment.MapTo<AssignmentDTO>();
+        }
+
+        public async Task<AssignmentDTO> UpdateAsync(UpdateAssignmentInput updateAssignmentInput)
+        {
+            var user = updateAssignmentInput.MapTo<Assignment>();
+            //var validator = new UpdateUserValidator(DbContext);
+            //await validator.ValidateAsync(user);
+
+            user = DbContext.Assignments.First(a => a.Id == updateAssignmentInput.Id);
+            user.Status = (AssignmentStatuses)updateAssignmentInput.Status;
+            await DbContext.SaveChangesAsync();
+
+            return user.MapTo<AssignmentDTO>();
         }
     }
 }

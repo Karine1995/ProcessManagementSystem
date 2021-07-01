@@ -1,4 +1,5 @@
-﻿using ProcessManagement.BLL.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
+using ProcessManagement.BLL.Infrastructure;
 using ProcessManagement.BLL.Services.Interfaces;
 using ProcessManagement.BLL.Validators.Users;
 using ProcessManagement.Common.Models.Inputs.Projects;
@@ -25,6 +26,13 @@ namespace ProcessManagement.BLL.Services.Implementations
 
             await DbContext.Projects.AddAsync(project);
             await DbContext.SaveChangesAsync();
+
+            return project.MapTo<ProjectDTO>();
+        }
+
+        public async Task<ProjectDTO> GetByIdAsync(int id)
+        {
+            var project = await DbContext.Projects.FirstOrDefaultAsync(m => m.Id == id);
 
             return project.MapTo<ProjectDTO>();
         }

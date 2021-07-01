@@ -17,6 +17,8 @@ namespace ProcessManagement.Mappers.Profiles
             CreateMap<CreateAssignmentInput, Assignment>();
 
             CreateMap<Assignment, AssignmentDTO>();
+
+            CreateMap<UpdateAssignmentInput, Assignment>();
         }
     }
 }

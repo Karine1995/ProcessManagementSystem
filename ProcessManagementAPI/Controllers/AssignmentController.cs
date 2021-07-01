@@ -30,5 +30,31 @@ namespace ProcessManagementAPI.Controllers
 
             return Ok("Assignment has been successfully created");
         }
+
+        /// <summary>
+        /// Get Assignment by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetAssignment(int id)
+        {
+            var result  = await ServiceFactory.AssignmentService.GetByIdAsync(id);
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Update Assignment
+        /// </summary>
+        /// <param name="updateAssignmentInput"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> UpdateAssignmentStatus(UpdateAssignmentInput updateAssignmentInput)
+        {
+            await ServiceFactory.AssignmentService.UpdateAsync(updateAssignmentInput);
+
+            return Ok("Assignment has been successfully updated");
+        }
     }
 }

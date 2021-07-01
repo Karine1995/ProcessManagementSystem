@@ -8,5 +8,7 @@ namespace ProcessManagement.BLL.Services.Interfaces
     public interface IProjectService : IService
     {
         Task<ProjectDTO> CreateAsync(CreateProjectInput createProjectInput);
+
+        Task<ProjectDTO> GetByIdAsync(int id);
     }
 }

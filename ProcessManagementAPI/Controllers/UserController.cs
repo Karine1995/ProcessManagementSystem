@@ -56,13 +56,13 @@ namespace ProcessManagementAPI.Controllers
         /// <summary>
         /// Delete user team
         /// </summary>
-        /// <param name="UpdateUserInput"></param>
+        /// <param name="DeleteUserInput"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> DeleteAsync(DeleteUserInput deleetUserInput)
+        public async Task<IActionResult> DeleteAsync(DeleteUserInput deleteUserInput)
         {
 
-            await ServiceFactory.UserService.DeleteAsync(deleetUserInput);
+            await ServiceFactory.UserService.DeleteAsync(deleteUserInput);
 
             return Ok("You are successfully deleted team");
         }

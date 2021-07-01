@@ -11,6 +11,10 @@ namespace ProcessManagement.BLL.Services.Interfaces
 {
     public interface IAssignmentService : IService
     {
-        Task<AssignmentDTO> CreateAsync(CreateAssignmentInput createTeamInput);
+        Task<AssignmentDTO> CreateAsync(CreateAssignmentInput createAssignmentInput);
+
+        Task<AssignmentDTO> GetByIdAsync(int id);
+
+        Task<AssignmentDTO> UpdateAsync(UpdateAssignmentInput updateAssignmentInput);
     }
 }
