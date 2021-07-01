@@ -10,6 +10,8 @@ namespace ProcessManagement.Mappers.Infrastructure
         {
             cfg.AddProfile(new UserProfile());
             cfg.AddProfile(new ProjectProfile());
+            cfg.AddProfile(new AssignmentProfile());
+            cfg.AddProfile(new TeamProfile());
         };
     }
 }

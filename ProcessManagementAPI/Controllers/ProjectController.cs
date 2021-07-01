@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using ProcessManagement.Common.Constants;
 using ProcessManagement.Common.Models.Inputs.Projects;
 using ProcessManagementAPI.Infrastructure;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ProcessManagementAPI.Controllers
@@ -20,13 +22,15 @@ namespace ProcessManagementAPI.Controllers
         }
 
         /// <summary>
-        /// Register user
+        /// Add Project
         /// </summary>
         /// <param name="createProjectInput"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Register(CreateProjectInput createProjectInput)
         {
+            //var a = User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Name);
+            var user = HttpContext.User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value;
             await ServiceFactory.ProjectService.CreateAsync(createProjectInput);
 
             return Ok("Project successfully added");

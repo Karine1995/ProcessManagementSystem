@@ -28,6 +28,16 @@ namespace ProcessManagementAPI.Infrastructure
         public IProjectService ProjectService => _serviceProvider.GetService<IProjectService>();
 
         /// <summary>
+        /// Assignment service
+        /// </summary>
+        public IAssignmentService AssignmentService => _serviceProvider.GetService<IAssignmentService>();
+
+        /// <summary>
+        /// Team service
+        /// </summary>
+        public ITeamService TeamService => _serviceProvider.GetService<ITeamService>();
+
+        /// <summary>
         /// Process management identity service
         /// </summary>
         public ProcessManagementIdentityService ProcessManagementIdentityService => _serviceProvider.GetService<ProcessManagementIdentityService>();

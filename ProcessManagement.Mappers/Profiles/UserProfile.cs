@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ProcessManagement.Common.Models.Inputs.Teams;
 using ProcessManagement.Common.Models.Inputs.Users;
 using ProcessManagement.DTOs.Models;
 using ProcessManagement.Entities.Models;
@@ -12,6 +13,10 @@ namespace ProcessManagement.Mappers.Profiles
             CreateMap<CreateUserInput, User>();
 
             CreateMap<User, UserDTO>();
+
+            CreateMap<UpdateUserInput, User>();
+
+            CreateMap<DeleteUserInput, User>();
         }
     }
 }

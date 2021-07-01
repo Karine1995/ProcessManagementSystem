@@ -1,11 +1,13 @@
 ﻿using ProcessManagement.BLL.Infrastructure;
 using ProcessManagement.BLL.Services.Interfaces;
 using ProcessManagement.BLL.Validators.Users;
+using ProcessManagement.Common.Models.Inputs.Teams;
 using ProcessManagement.Common.Models.Inputs.Users;
 using ProcessManagement.DAL.Infrastructure;
 using ProcessManagement.DTOs.Models;
 using ProcessManagement.Entities.Models;
 using ProcessManagement.Mappers.Infrastructure;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProcessManagement.BLL.Services.Implementations
@@ -24,6 +26,30 @@ namespace ProcessManagement.BLL.Services.Implementations
             await validator.ValidateAsync(user);
 
             await DbContext.Users.AddAsync(user);
+            await DbContext.SaveChangesAsync();
+
+            return user.MapTo<UserDTO>();
+        }
+
+        public async Task<UserDTO> UpdateAsync(UpdateUserInput updateTeamInput)
+        {
+            var Team = updateTeamInput.MapTo<User>();
+           // var validator = new UpdateUserValidator(DbContext);
+
+            var user = DbContext.Users.First(a => a.Id == updateTeamInput.UserId);
+            user.TeamId = updateTeamInput.TeamId;
+            await DbContext.SaveChangesAsync();
+
+            return user.MapTo<UserDTO>();
+        }
+
+        public async Task<UserDTO> DeleteAsync(DeleteUserInput deleteTeamInput)
+        {
+            var Team = deleteTeamInput.MapTo<User>();
+            // var validator = new DeleteteUserValidator(DbContext);
+
+            var user = DbContext.Users.First(a => a.Id == deleteTeamInput.UserId);
+            user.TeamId = null;
             await DbContext.SaveChangesAsync();
 
             return user.MapTo<UserDTO>();

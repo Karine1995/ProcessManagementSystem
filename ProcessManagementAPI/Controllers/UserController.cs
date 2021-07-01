@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProcessManagement.Common.Constants;
 using ProcessManagement.Common.Helpers;
+using ProcessManagement.Common.Models.Inputs.Teams;
 using ProcessManagement.Common.Models.Inputs.Users;
 using ProcessManagementAPI.Infrastructure;
 using System.Threading.Tasks;
@@ -26,7 +27,6 @@ namespace ProcessManagementAPI.Controllers
         /// <param name="createUserInput"></param>
         /// <returns></returns>
         [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> Register(CreateUserInput createUserInput)
         {
             using var transaction = TransactionHelper.CreateTransaction();
@@ -37,6 +37,34 @@ namespace ProcessManagementAPI.Controllers
             transaction.Complete();
 
             return Ok("You are successfully registered");
+        }
+
+        /// <summary>
+        /// Update user team
+        /// </summary>
+        /// <param name="UpdateUserInput"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> UpdateAsync(UpdateUserInput updateUserInput)
+        {
+
+            await ServiceFactory.UserService.UpdateAsync(updateUserInput);
+
+            return Ok("You are successfully updated");
+        }
+
+        /// <summary>
+        /// Delete user team
+        /// </summary>
+        /// <param name="UpdateUserInput"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> DeleteAsync(DeleteUserInput deleetUserInput)
+        {
+
+            await ServiceFactory.UserService.DeleteAsync(deleetUserInput);
+
+            return Ok("You are successfully deleted team");
         }
     }
 }
