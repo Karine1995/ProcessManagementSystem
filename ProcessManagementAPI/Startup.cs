@@ -48,7 +48,7 @@ namespace ProcessManagementAPI
             app.UseMiddleware<SetResponseContentType>();
 
             app.UseSerilogRequestLogging();
-
+           
             app.UseSwagger();
 
             app.UseHttpsRedirection();

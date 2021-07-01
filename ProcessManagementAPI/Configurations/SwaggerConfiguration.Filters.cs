@@ -12,16 +12,6 @@ namespace ProcessManagementAPI.Configurations
         {
             var versionParameter = operation.Parameters.Single(p => p.Name == Constants.Version);
             operation.Parameters.Remove(versionParameter);
-
-            if (operation.Parameters == null)
-                operation.Parameters = new List<OpenApiParameter>();
-
-            operation.Parameters.Add(new OpenApiParameter
-            {
-                Name = "accept-language",
-                In = ParameterLocation.Header,
-                Required = true
-            });
         }
     }
 

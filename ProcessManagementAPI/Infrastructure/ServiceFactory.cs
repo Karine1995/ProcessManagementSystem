@@ -21,7 +21,12 @@ namespace ProcessManagementAPI.Infrastructure
         /// User service
         /// </summary>
         public IUserService UserService => _serviceProvider.GetService<IUserService>();
-    
+
+        /// <summary>
+        /// Project service
+        /// </summary>
+        public IProjectService ProjectService => _serviceProvider.GetService<IProjectService>();
+
         /// <summary>
         /// Process management identity service
         /// </summary>

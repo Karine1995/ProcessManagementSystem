@@ -9,6 +9,7 @@ namespace ProcessManagement.Mappers.Infrastructure
         public static Action<IMapperConfigurationExpression> Configure = (cfg) =>
         {
             cfg.AddProfile(new UserProfile());
+            cfg.AddProfile(new ProjectProfile());
         };
     }
 }

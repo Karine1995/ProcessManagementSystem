@@ -26,6 +26,7 @@ namespace ProcessManagement.IdentityServer4
             services.ConfigureAuthentication(Configuration);
             services.ConfigureAuthorization();
             services.ConfigureFilters();
+            services.ConfigureFluentValidation();
         }
 
         public void Configure(IApplicationBuilder app)

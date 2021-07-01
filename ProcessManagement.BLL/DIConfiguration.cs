@@ -24,7 +24,7 @@ namespace ProcessManagement.BLL
             //services
             services.AddScoped<IService, Service>();
             services.AddScoped<IUserService, UserService>();
-
+            services.AddScoped<IProjectService, ProjectService>();
             //3rd party integration services
             services.AddScoped<ProcessManagementIdentityService>();
         }
