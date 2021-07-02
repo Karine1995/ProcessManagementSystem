@@ -1,4 +1,5 @@
-﻿using ProcessManagement.BLL.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
+using ProcessManagement.BLL.Infrastructure;
 using ProcessManagement.BLL.Services.Interfaces;
 using ProcessManagement.BLL.Validators.Users;
 using ProcessManagement.Common.Models.Inputs.Teams;
@@ -55,6 +56,13 @@ namespace ProcessManagement.BLL.Services.Implementations
             await DbContext.SaveChangesAsync();
 
             return user.MapTo<UserDTO>();
+        }
+
+        public async Task<User> GetByUsernameAsync(string username)
+        {
+            var user = await DbContext.Users.FirstOrDefaultAsync(m => m.Username == username);
+
+            return user;
         }
     }
 }

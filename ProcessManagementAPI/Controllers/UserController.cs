@@ -42,7 +42,7 @@ namespace ProcessManagementAPI.Controllers
         /// <summary>
         /// Update user team
         /// </summary>
-        /// <param name="UpdateUserInput"></param>
+        /// <param name="updateUserInput"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> UpdateAsync(UpdateUserInput updateUserInput)
@@ -56,7 +56,7 @@ namespace ProcessManagementAPI.Controllers
         /// <summary>
         /// Delete user team
         /// </summary>
-        /// <param name="DeleteUserInput"></param>
+        /// <param name="deleteUserInput"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> DeleteAsync(DeleteUserInput deleteUserInput)
@@ -65,6 +65,19 @@ namespace ProcessManagementAPI.Controllers
             await ServiceFactory.UserService.DeleteAsync(deleteUserInput);
 
             return Ok("You are successfully deleted team");
+        }
+
+        /// <summary>
+        /// Get User Info by username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetByUsernameAsync(string username)
+        {
+            var result = await ServiceFactory.UserService.GetByUsernameAsync(username);
+
+            return Ok(result);
         }
     }
 }

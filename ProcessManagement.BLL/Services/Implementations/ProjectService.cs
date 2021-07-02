@@ -17,10 +17,11 @@ namespace ProcessManagement.BLL.Services.Implementations
         {
         }
 
-        public async Task<ProjectDTO> CreateAsync(CreateProjectInput createProjectInput)
+        public async Task<ProjectDTO> CreateAsync(CreateProjectInput createProjectInput, User user)
         {
             var project = createProjectInput.MapTo<Project>();
-            project.UserId = 21;
+            project.UserId = user.Id;
+            project.User = user;
             var validator = new CreateProjectValidator(DbContext);
             await validator.ValidateAsync(project);
 
@@ -36,5 +37,19 @@ namespace ProcessManagement.BLL.Services.Implementations
 
             return project.MapTo<ProjectDTO>();
         }
+
+        //public async Task<ProjectDTO> DeleteAsync(DeleteProjectInput deleteProjectInput, User user)
+        //{
+        //    var project = deleteProjectInput.MapTo<Project>();
+        //    project.UserId = user.Id;
+        //    project.User = user;
+        //    // var validator = new DeleteProjectValidator(DbContext);
+        //    // await validator.ValidateAsync(project);
+
+        //    DbContext.Projects.Remove(project);
+        //    await DbContext.SaveChangesAsync();
+
+        //    return project.MapTo<ProjectDTO>();
+        //}
     }
 }

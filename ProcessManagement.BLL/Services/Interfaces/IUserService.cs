@@ -2,6 +2,7 @@
 using ProcessManagement.Common.Models.Inputs.Teams;
 using ProcessManagement.Common.Models.Inputs.Users;
 using ProcessManagement.DTOs.Models;
+using ProcessManagement.Entities.Models;
 using System.Threading.Tasks;
 
 namespace ProcessManagement.BLL.Services.Interfaces
@@ -13,5 +14,7 @@ namespace ProcessManagement.BLL.Services.Interfaces
         Task<UserDTO> UpdateAsync(UpdateUserInput updateUserInput);
 
         Task<UserDTO> DeleteAsync(DeleteUserInput deeleteUserInput);
+
+        Task<User> GetByUsernameAsync(string username);
     }
 }

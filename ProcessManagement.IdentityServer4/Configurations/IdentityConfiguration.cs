@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using IdentityServer4.AspNetIdentity;
+using IdentityServer4.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProcessManagement.IdentityServer4.Common.Constants;
 using ProcessManagement.IdentityServer4.Data;
 using ProcessManagement.IdentityServer4.Data.Entities;
+using ProcessManagement.IdentityServer4.IdentityServices;
 using System.Reflection;
 
 namespace ProcessManagement.IdentityServer4.Configurations
@@ -45,6 +48,8 @@ namespace ProcessManagement.IdentityServer4.Configurations
 
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
+
+            services.AddScoped<IProfileService, ProfileService>();
         }
     }
 }

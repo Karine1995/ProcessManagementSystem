@@ -30,8 +30,10 @@ namespace ProcessManagementAPI.Controllers
         public async Task<IActionResult> Register(CreateProjectInput createProjectInput)
         {
             //var a = User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Name);
-            var user = HttpContext.User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value;
-            await ServiceFactory.ProjectService.CreateAsync(createProjectInput);
+            //var user = HttpContext.User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value;
+            var user = User.Claims.FirstOrDefault(u => u.Type == Claims.Username).Value;
+            var userInfo = await ServiceFactory.UserService.GetByUsernameAsync(user);
+            await ServiceFactory.ProjectService.CreateAsync(createProjectInput, userInfo);
 
             return Ok("Project successfully added");
         }

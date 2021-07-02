@@ -26,6 +26,7 @@
     <ProjectReference Include="..\ProcessManagement.BLL\ProcessManagement.BLL.csproj" />
     <ProjectReference Include="..\ProcessManagement.Common\ProcessManagement.Common.csproj" />
     <ProjectReference Include="..\ProcessManagement.DTOs\ProcessManagement.DTOs.csproj" />
+    <ProjectReference Include="..\ProcessManagement.Entities\ProcessManagement.Entities.csproj" />
     <ProjectReference Include="..\ProcessManagement.Mappers\ProcessManagement.Mappers.csproj" />
     <ProjectReference Include="..\ProcessManagement.Validators\ProcessManagement.Validators.csproj" />
     <ProjectReference Include="..\ProcessManagement.ViewModels\ProcessManagement.ViewModels.csproj" />

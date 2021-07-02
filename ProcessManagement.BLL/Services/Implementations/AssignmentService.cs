@@ -22,10 +22,10 @@ namespace ProcessManagement.BLL.Services.Implementations
         {
         }
 
-        public async Task<AssignmentDTO> CreateAsync(CreateAssignmentInput createAssignmentInput)
+        public async Task<AssignmentDTO> CreateAsync(CreateAssignmentInput createAssignmentInput, int userId)
         {
             var Assignment = createAssignmentInput.MapTo<Assignment>();
-            Assignment.CreatedById = 21;
+            Assignment.CreatedById = userId;
             var validator = new CreateAssignmentValidator(DbContext);
             await validator.ValidateAsync(Assignment);
 

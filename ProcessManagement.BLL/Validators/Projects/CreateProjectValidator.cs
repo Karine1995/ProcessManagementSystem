@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using userType = ProcessManagement.Common.Enumerations.UserTypes;
 
 namespace ProcessManagement.BLL.Validators.Users
 {
@@ -21,6 +22,8 @@ namespace ProcessManagement.BLL.Validators.Users
         {
             var errors = new Dictionary<string, string[]>();
 
+            if (project.User.Type != userType.ProjectManager)
+                errors.Add("type", new[] { "You don't have permission" });
             //if (await DbContext.Users.AnyAsync(u => u.Username == user.Username))
             //    errors.Add("username", new[] { "Username already exists" });
 

@@ -2,6 +2,7 @@
 using ProcessManagement.Common.Constants;
 using ProcessManagement.Common.Models.Inputs.Assignments;
 using ProcessManagementAPI.Infrastructure;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProcessManagementAPI.Controllers
@@ -26,7 +27,9 @@ namespace ProcessManagementAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAssignment(CreateAssignmentInput createAssignmentInput)
         {
-            await ServiceFactory.AssignmentService.CreateAsync(createAssignmentInput);
+            var user = User.Claims.FirstOrDefault(u => u.Type == Claims.Username).Value;
+            var userInfo = await ServiceFactory.UserService.GetByUsernameAsync(user);
+            await ServiceFactory.AssignmentService.CreateAsync(createAssignmentInput, userInfo.Id);
 
             return Ok("Assignment has been successfully created");
         }
