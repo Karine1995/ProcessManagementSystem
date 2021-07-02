@@ -10,18 +10,18 @@ using System.Text;
 using System.Threading.Tasks;
 using userType = ProcessManagement.Common.Enumerations.UserTypes;
 
-namespace ProcessManagement.BLL.Validators.Users
+namespace ProcessManagement.BLL.Validators.Assignments
 {
-    internal class CreateAssignmentValidator : EntityValidator<Assignment>
+    internal class DeleteAssignmentValidator : EntityValidator<Assignment>
     {
-        public CreateAssignmentValidator(ProcessManagementDbContext dbContext) : base(dbContext)
+        public DeleteAssignmentValidator(ProcessManagementDbContext dbContext) : base(dbContext)
         {
         }
 
         public override async Task ValidateAsync(Assignment assignment)
         {
             var errors = new Dictionary<string, string[]>();
-           
+
             if (assignment.CreatedByUser.Type != userType.ProjectManager)
                 errors.Add("type", new[] { "You don't have permission" });
 

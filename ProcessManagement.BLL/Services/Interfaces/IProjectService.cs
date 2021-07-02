@@ -10,6 +10,6 @@ namespace ProcessManagement.BLL.Services.Interfaces
     {
         Task<ProjectDTO> CreateAsync(CreateProjectInput createProjectInput, User userId);
 
-        Task<ProjectDTO> GetByIdAsync(int id);
+        Project GetByIdAsync(int id);
     }
 }

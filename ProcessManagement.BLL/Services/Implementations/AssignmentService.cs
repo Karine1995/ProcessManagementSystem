@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using ProcessManagement.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using ProcessManagement.Common.Enumerations;
+using ProcessManagement.BLL.Validators.Assignments;
 
 namespace ProcessManagement.BLL.Services.Implementations
 {
@@ -22,17 +23,18 @@ namespace ProcessManagement.BLL.Services.Implementations
         {
         }
 
-        public async Task<AssignmentDTO> CreateAsync(CreateAssignmentInput createAssignmentInput, int userId)
+        public async Task<AssignmentDTO> CreateAsync(CreateAssignmentInput createAssignmentInput, User user)
         {
-            var Assignment = createAssignmentInput.MapTo<Assignment>();
-            Assignment.CreatedById = userId;
+            var assignment = createAssignmentInput.MapTo<Assignment>();
+            assignment.CreatedById = user.Id;
+            assignment.CreatedByUser = user;
             var validator = new CreateAssignmentValidator(DbContext);
-            await validator.ValidateAsync(Assignment);
+            await validator.ValidateAsync(assignment);
 
-            await DbContext.Assignments.AddAsync(Assignment);
+            await DbContext.Assignments.AddAsync(assignment);
             await DbContext.SaveChangesAsync();
 
-            return Assignment.MapTo<AssignmentDTO>();
+            return assignment.MapTo<AssignmentDTO>();
         }
 
         public async Task<AssignmentDTO> GetByIdAsync(int id)
@@ -53,6 +55,21 @@ namespace ProcessManagement.BLL.Services.Implementations
             await DbContext.SaveChangesAsync();
 
             return user.MapTo<AssignmentDTO>();
+        }
+
+        public async Task<AssignmentDTO> DeleteAsync(DeleteAssignmentInput deleteAssignmentInput, User user)
+        {
+            var assignment = deleteAssignmentInput.MapTo<Assignment>();
+            assignment = DbContext.Assignments.First(a => a.Id == deleteAssignmentInput.Id);
+            assignment.CreatedById = user.Id;
+            assignment.CreatedByUser = user;
+            var validator = new DeleteAssignmentValidator(DbContext);
+            await validator.ValidateAsync(assignment);
+
+            DbContext.Assignments.Remove(assignment);
+            await DbContext.SaveChangesAsync();
+
+            return assignment.MapTo<AssignmentDTO>();
         }
     }
 }

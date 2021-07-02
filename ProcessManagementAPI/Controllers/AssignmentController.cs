@@ -29,7 +29,7 @@ namespace ProcessManagementAPI.Controllers
         {
             var user = User.Claims.FirstOrDefault(u => u.Type == Claims.Username).Value;
             var userInfo = await ServiceFactory.UserService.GetByUsernameAsync(user);
-            await ServiceFactory.AssignmentService.CreateAsync(createAssignmentInput, userInfo.Id);
+            await ServiceFactory.AssignmentService.CreateAsync(createAssignmentInput, userInfo);
 
             return Ok("Assignment has been successfully created");
         }
@@ -58,6 +58,21 @@ namespace ProcessManagementAPI.Controllers
             await ServiceFactory.AssignmentService.UpdateAsync(updateAssignmentInput);
 
             return Ok("Assignment has been successfully updated");
+        }
+
+        /// <summary>
+        /// Delete Assignment
+        /// </summary>
+        /// <param name="deleteAssignmentInput"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> DeleteAssignment(DeleteAssignmentInput deleteAssignmentInput)
+        {
+            var user = User.Claims.FirstOrDefault(u => u.Type == Claims.Username).Value;
+            var userInfo = await ServiceFactory.UserService.GetByUsernameAsync(user);
+            await ServiceFactory.AssignmentService.DeleteAsync(deleteAssignmentInput, userInfo);
+
+            return Ok("Assignment has been successfully deleted");
         }
     }
 }

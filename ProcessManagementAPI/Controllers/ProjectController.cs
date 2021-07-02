@@ -44,9 +44,9 @@ namespace ProcessManagementAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetProject(int id)
+        public IActionResult GetProject(int id)
         {
-            var result = await ServiceFactory.ProjectService.GetByIdAsync(id);
+            var result = ServiceFactory.ProjectService.GetByIdAsync(id);
 
             return Ok(result);
         }
