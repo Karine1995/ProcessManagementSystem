@@ -1,5 +1,7 @@
-﻿using ProcessManagement.DAL.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
+using ProcessManagement.DAL.Infrastructure;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProcessManagement.BLL.Infrastructure
@@ -9,6 +11,10 @@ namespace ProcessManagement.BLL.Infrastructure
         protected readonly ProcessManagementDbContext DbContext;
 
         public Service(ProcessManagementDbContext dbContext) => DbContext = dbContext;
+
+        protected async Task<int> GetUserIdByName(string username) 
+            => (await DbContext.Users.Select(u => new { u.Id, u.Username })
+            .FirstOrDefaultAsync(u => u.Username == username)).Id;
 
         #region dispose
         private bool disposedValue;

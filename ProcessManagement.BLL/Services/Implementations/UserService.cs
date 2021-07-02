@@ -1,13 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using ProcessManagement.BLL.Infrastructure;
 using ProcessManagement.BLL.Services.Interfaces;
 using ProcessManagement.BLL.Validators.Users;
+using ProcessManagement.Common.Enumerations;
+using ProcessManagement.Common.Helpers;
 using ProcessManagement.Common.Models.Inputs.Teams;
 using ProcessManagement.Common.Models.Inputs.Users;
 using ProcessManagement.DAL.Infrastructure;
 using ProcessManagement.DTOs.Models;
 using ProcessManagement.Entities.Models;
 using ProcessManagement.Mappers.Infrastructure;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,37 +36,41 @@ namespace ProcessManagement.BLL.Services.Implementations
             return user.MapTo<UserDTO>();
         }
 
-        public async Task<UserDTO> UpdateAsync(UpdateUserInput updateTeamInput)
+        public async Task<UserDTO> AddToTeamAsync(AddUserToTeamInput updateTeamInput)
         {
-            var user = updateTeamInput.MapTo<User>();
-            //var validator = new UpdateUserValidator(DbContext);
-            //await validator.ValidateAsync(user);
+            var user = await DbContext.Users.FirstOrDefaultAsync(a => a.Id == updateTeamInput.UserId);
 
-            user = DbContext.Users.First(a => a.Id == updateTeamInput.UserId);
             user.TeamId = updateTeamInput.TeamId;
+
+            DbContext.Users.Update(user);
             await DbContext.SaveChangesAsync();
 
             return user.MapTo<UserDTO>();
         }
 
-        public async Task<UserDTO> DeleteAsync(DeleteUserInput deleteTeamInput)
+        public async Task<UserDTO> DetachFromTeamAsync(int id)
         {
-            var user = deleteTeamInput.MapTo<User>();
-            var validator = new DeleteUserValidator(DbContext);
-            await validator.ValidateAsync(user);
+            var user = await DbContext.Users.FirstOrDefaultAsync(a => a.Id == id);
 
-            user = DbContext.Users.First(a => a.Id == deleteTeamInput.UserId);
+            if (user == default)
+                ExceptionHelper.ThrowFaultException("User not found", StatusCodes.Status400BadRequest);
+
             user.TeamId = null;
+
+            DbContext.Update(user);
             await DbContext.SaveChangesAsync();
 
             return user.MapTo<UserDTO>();
         }
 
-        public async Task<User> GetByUsernameAsync(string username)
+        public async Task<UserDTO> GetByUsernameAsync(string username)
         {
             var user = await DbContext.Users.FirstOrDefaultAsync(m => m.Username == username);
 
-            return user;
+            return user.MapTo<UserDTO>();
         }
+
+        public async Task<bool> IsInTypeAsync(UserTypes[] requiredUserTypes, string username)
+            => await DbContext.Users.AnyAsync(u => u.Username == username && requiredUserTypes.Contains(u.Type));
     }
 }

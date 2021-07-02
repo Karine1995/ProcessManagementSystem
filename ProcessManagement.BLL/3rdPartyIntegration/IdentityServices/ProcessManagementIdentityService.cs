@@ -29,7 +29,7 @@ namespace ProcessManagement.BLL._3rdPartyIntegration
             _headers = FillHeaders().GetAwaiter().GetResult();
         }
 
-        public async Task<int> RegisterUser(CreateUserInput createUserInput)
+        public async Task<int> RegisterUserAsync(CreateUserInput createUserInput)
         {
             Dictionary<string, object> body = new()
             {

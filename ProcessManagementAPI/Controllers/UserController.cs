@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProcessManagement.Common.Constants;
+using ProcessManagement.Common.Enumerations;
 using ProcessManagement.Common.Helpers;
 using ProcessManagement.Common.Models.Inputs.Teams;
 using ProcessManagement.Common.Models.Inputs.Users;
+using ProcessManagementAPI.ActionFilters;
 using ProcessManagementAPI.Infrastructure;
 using System.Threading.Tasks;
 
@@ -32,7 +33,7 @@ namespace ProcessManagementAPI.Controllers
             using var transaction = TransactionHelper.CreateTransaction();
 
             await ServiceFactory.UserService.CreateAsync(createUserInput);
-            await ServiceFactory.ProcessManagementIdentityService.RegisterUser(createUserInput);
+            await ServiceFactory.ProcessManagementIdentityService.RegisterUserAsync(createUserInput);
 
             transaction.Complete();
 
@@ -40,40 +41,40 @@ namespace ProcessManagementAPI.Controllers
         }
 
         /// <summary>
-        /// Update user team
+        /// Add user to team
         /// </summary>
         /// <param name="updateUserInput"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> UpdateAsync(UpdateUserInput updateUserInput)
+        [RequiredUserType(UserTypes.ProjectManager)]
+        public async Task<IActionResult> AddToTeam(AddUserToTeamInput updateUserInput)
         {
+            await ServiceFactory.UserService.AddToTeamAsync(updateUserInput);
 
-            await ServiceFactory.UserService.UpdateAsync(updateUserInput);
-
-            return Ok("You are successfully updated");
+            return Ok("User successfully attached to team");
         }
 
         /// <summary>
-        /// Delete user team
+        /// Remove user from team
         /// </summary>
-        /// <param name="deleteUserInput"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> DeleteAsync(DeleteUserInput deleteUserInput)
+        [RequiredUserType(UserTypes.ProjectManager)]
+        public async Task<IActionResult> DetachFromTeam(int id)
         {
+            await ServiceFactory.UserService.DetachFromTeamAsync(id);
 
-            await ServiceFactory.UserService.DeleteAsync(deleteUserInput);
-
-            return Ok("You are successfully deleted team");
+            return Ok("User successfully removed from team");
         }
 
         /// <summary>
-        /// Get User Info by username
+        /// Get User by username
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetByUsernameAsync(string username)
+        public async Task<IActionResult> GetByUsername(string username)
         {
             var result = await ServiceFactory.UserService.GetByUsernameAsync(username);
 

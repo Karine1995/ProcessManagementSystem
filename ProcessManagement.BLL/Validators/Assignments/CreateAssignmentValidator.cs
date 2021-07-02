@@ -1,14 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using ProcessManagement.BLL.Infrastructure;
 using ProcessManagement.Common.Helpers;
 using ProcessManagement.DAL.Infrastructure;
 using ProcessManagement.Entities.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using userType = ProcessManagement.Common.Enumerations.UserTypes;
 
 namespace ProcessManagement.BLL.Validators.Users
 {
@@ -22,8 +20,11 @@ namespace ProcessManagement.BLL.Validators.Users
         {
             var errors = new Dictionary<string, string[]>();
            
-            if (assignment.CreatedByUser.Type != userType.ProjectManager)
-                errors.Add("type", new[] { "You don't have permission" });
+            if (!await DbContext.Users.AnyAsync(u => u.Id == assignment.AssigneeId))
+                errors.Add("assigneeId", new[] { "User not found" });
+
+            if (!await DbContext.Projects.AnyAsync(p => p.Id == assignment.ProjectId))
+                errors.Add("projectId", new[] { "Project not found" });
 
             if (errors.Any())
                 ExceptionHelper.ThrowFaultException("Bad request", StatusCodes.Status400BadRequest, errors);

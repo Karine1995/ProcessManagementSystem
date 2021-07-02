@@ -1,12 +1,9 @@
 ﻿using IdentityServer4.Models;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using ProcessManagement.IdentityServer4.Common.Constants;
 using ProcessManagement.IdentityServer4.Data.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 

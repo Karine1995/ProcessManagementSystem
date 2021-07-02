@@ -1,17 +1,10 @@
 ﻿using ProcessManagement.BLL.Infrastructure;
 using ProcessManagement.BLL.Services.Interfaces;
-using ProcessManagement.BLL.Validators.Users;
-using ProcessManagement.Common.Models.Inputs.Teams;
 using ProcessManagement.DAL.Infrastructure;
 using ProcessManagement.DTOs.Models;
 using ProcessManagement.Mappers.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ProcessManagement.Entities.Models;
-using ProcessManagement.BLL.Validators.Teams;
 
 namespace ProcessManagement.BLL.Services.Implementations
 {
@@ -21,16 +14,14 @@ namespace ProcessManagement.BLL.Services.Implementations
         {
         }
 
-        public async Task<TeamDTO> CreateAsync(CreateTeamInput createTeamInput)
+        public async Task<TeamDTO> CreateAsync(string name)
         {
-            var Team = createTeamInput.MapTo<Team>();
-            var validator = new CreateTeamValidator(DbContext);
-            await validator.ValidateAsync(Team);
+            var team = new Team() { Name = name };
 
-            await DbContext.Teams.AddAsync(Team);
+            await DbContext.Teams.AddAsync(team);
             await DbContext.SaveChangesAsync();
 
-            return Team.MapTo<TeamDTO>();
+            return team.MapTo<TeamDTO>();
         }
     }
 }

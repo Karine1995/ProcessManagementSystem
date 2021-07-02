@@ -1,14 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProcessManagement.BLL.Infrastructure;
 using ProcessManagement.BLL.Services.Interfaces;
-using ProcessManagement.BLL.Validators.Projects;
-using ProcessManagement.BLL.Validators.Users;
 using ProcessManagement.Common.Models.Inputs.Projects;
 using ProcessManagement.DAL.Infrastructure;
 using ProcessManagement.DTOs.Models;
 using ProcessManagement.Entities.Models;
 using ProcessManagement.Mappers.Infrastructure;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProcessManagement.BLL.Services.Implementations
@@ -19,13 +16,10 @@ namespace ProcessManagement.BLL.Services.Implementations
         {
         }
 
-        public async Task<ProjectDTO> CreateAsync(CreateProjectInput createProjectInput, User user)
+        public async Task<ProjectDTO> CreateAsync(CreateProjectInput createProjectInput, string username)
         {
             var project = createProjectInput.MapTo<Project>();
-            project.UserId = user.Id;
-            project.User = user;
-            var validator = new CreateProjectValidator(DbContext);
-            await validator.ValidateAsync(project);
+            project.UserId = await GetUserIdByName(username);
 
             await DbContext.Projects.AddAsync(project);
             await DbContext.SaveChangesAsync();
@@ -33,23 +27,16 @@ namespace ProcessManagement.BLL.Services.Implementations
             return project.MapTo<ProjectDTO>();
         }
 
-        public Project GetByIdAsync(int id)
+        public async Task<ProjectDTO> GetByIdAsync(int id)
         {
-            var project = DbContext.Projects.Where(m => m.Id == id)
-                                            .Include(m => m.Assignments)
-                                            .FirstOrDefault();
-            //var assignments = await DbContext.Assignments.FirstOrDefaultAsync(m => m.ProjectId == id);
-            //project.Assignments.MapTo<AssignmentDTO>();
-            return project;
+            var project = await DbContext.Projects.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
+
+            return project.MapTo<ProjectDTO>();
         }
 
-        public async Task<ProjectDTO> DeleteAsync(DeleteProjectInput deleteProjectInput, User user)
+        public async Task<ProjectDTO> DeleteAsync(int id)
         {
-            var project = deleteProjectInput.MapTo<Project>();
-            project.UserId = user.Id;
-            project.User = user;
-            var validator = new DeleteProjectValidator(DbContext);
-            await validator.ValidateAsync(project);
+            var project = await DbContext.Projects.FirstOrDefaultAsync(p => p.Id == id);
 
             DbContext.Projects.Remove(project);
             await DbContext.SaveChangesAsync();

@@ -12,11 +12,9 @@ namespace ProcessManagement.Mappers.Profiles
         {
             CreateMap<CreateUserInput, User>();
 
-            CreateMap<User, UserDTO>();
+            CreateMap<User, UserDTO>().ReverseMap();
 
-            CreateMap<UpdateUserInput, User>();
-
-            CreateMap<DeleteUserInput, User>();
+            CreateMap<AddUserToTeamInput, User>();
         }
     }
 }

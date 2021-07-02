@@ -2,11 +2,6 @@
 using ProcessManagement.Common.Models.Inputs.Assignments;
 using ProcessManagement.DTOs.Models;
 using ProcessManagement.Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProcessManagement.Mappers.Profiles
 {
@@ -16,9 +11,9 @@ namespace ProcessManagement.Mappers.Profiles
         {
             CreateMap<CreateAssignmentInput, Assignment>();
 
-            CreateMap<Assignment, AssignmentDTO>();
+            CreateMap<Assignment, AssignmentDTO>().ReverseMap();
 
-            CreateMap<UpdateAssignmentInput, Assignment>();
+            CreateMap<UpdateAssignmentStatusInput, Assignment>();
         }
     }
 }

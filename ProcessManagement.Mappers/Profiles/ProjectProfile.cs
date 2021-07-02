@@ -11,7 +11,7 @@ namespace ProcessManagement.Mappers.Profiles
         {
             CreateMap<CreateProjectInput, Project>();
 
-            CreateMap<Project, ProjectDTO>();
+            CreateMap<Project, ProjectDTO>().ReverseMap();
         }
     }
 }

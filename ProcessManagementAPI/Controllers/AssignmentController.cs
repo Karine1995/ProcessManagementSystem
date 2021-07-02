@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProcessManagement.Common.Constants;
+using ProcessManagement.Common.Enumerations;
 using ProcessManagement.Common.Models.Inputs.Assignments;
+using ProcessManagement.Mappers.Infrastructure;
+using ProcessManagement.ViewModels.Models.Assignments;
+using ProcessManagementAPI.ActionFilters;
 using ProcessManagementAPI.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,11 +29,11 @@ namespace ProcessManagementAPI.Controllers
         /// <param name="createAssignmentInput"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> AddAssignment(CreateAssignmentInput createAssignmentInput)
+        [RequiredUserType(UserTypes.ProjectManager)]
+        public async Task<IActionResult> Create(CreateAssignmentInput createAssignmentInput)
         {
-            var user = User.Claims.FirstOrDefault(u => u.Type == Claims.Username).Value;
-            var userInfo = await ServiceFactory.UserService.GetByUsernameAsync(user);
-            await ServiceFactory.AssignmentService.CreateAsync(createAssignmentInput, userInfo);
+            var username = User.Claims.FirstOrDefault(u => u.Type == Claims.Username).Value;
+            await ServiceFactory.AssignmentService.CreateAsync(createAssignmentInput, username);
 
             return Ok("Assignment has been successfully created");
         }
@@ -42,9 +46,9 @@ namespace ProcessManagementAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAssignment(int id)
         {
-            var result  = await ServiceFactory.AssignmentService.GetByIdAsync(id);
+            var result = await ServiceFactory.AssignmentService.GetByIdAsync(id);
 
-            return Ok(result);
+            return Ok(result.MapTo<AssignmentVM>());
         }
 
         /// <summary>
@@ -52,25 +56,24 @@ namespace ProcessManagementAPI.Controllers
         /// </summary>
         /// <param name="updateAssignmentInput"></param>
         /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> UpdateAssignmentStatus(UpdateAssignmentInput updateAssignmentInput)
+        [HttpPut]
+        public async Task<IActionResult> UpdateAssignmentStatus(UpdateAssignmentStatusInput updateAssignmentInput)
         {
-            await ServiceFactory.AssignmentService.UpdateAsync(updateAssignmentInput);
+            await ServiceFactory.AssignmentService.UpdateStatusAsync(updateAssignmentInput);
 
-            return Ok("Assignment has been successfully updated");
+            return Ok("Assignment status has been successfully updated");
         }
 
         /// <summary>
         /// Delete Assignment
         /// </summary>
-        /// <param name="deleteAssignmentInput"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> DeleteAssignment(DeleteAssignmentInput deleteAssignmentInput)
+        [HttpDelete]
+        [RequiredUserType(UserTypes.ProjectManager)]
+        public async Task<IActionResult> DeleteAssignment(int id)
         {
-            var user = User.Claims.FirstOrDefault(u => u.Type == Claims.Username).Value;
-            var userInfo = await ServiceFactory.UserService.GetByUsernameAsync(user);
-            await ServiceFactory.AssignmentService.DeleteAsync(deleteAssignmentInput, userInfo);
+            await ServiceFactory.AssignmentService.DeleteAsync(id);
 
             return Ok("Assignment has been successfully deleted");
         }

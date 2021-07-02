@@ -1,10 +1,5 @@
 ﻿using FluentValidation;
 using ProcessManagement.Common.Models.Inputs.Assignments;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProcessManagement.Validators.Validators
 {

@@ -1,8 +1,8 @@
 ﻿using ProcessManagement.BLL.Infrastructure;
+using ProcessManagement.Common.Enumerations;
 using ProcessManagement.Common.Models.Inputs.Teams;
 using ProcessManagement.Common.Models.Inputs.Users;
 using ProcessManagement.DTOs.Models;
-using ProcessManagement.Entities.Models;
 using System.Threading.Tasks;
 
 namespace ProcessManagement.BLL.Services.Interfaces
@@ -11,10 +11,12 @@ namespace ProcessManagement.BLL.Services.Interfaces
     {
         Task<UserDTO> CreateAsync(CreateUserInput createUserInput);
 
-        Task<UserDTO> UpdateAsync(UpdateUserInput updateUserInput);
+        Task<UserDTO> AddToTeamAsync(AddUserToTeamInput updateUserInput);
 
-        Task<UserDTO> DeleteAsync(DeleteUserInput deeleteUserInput);
+        Task<UserDTO> DetachFromTeamAsync(int id);
 
-        Task<User> GetByUsernameAsync(string username);
+        Task<UserDTO> GetByUsernameAsync(string username);
+
+        Task<bool> IsInTypeAsync(UserTypes[] requiredUserTypes, string username);
     }
 }

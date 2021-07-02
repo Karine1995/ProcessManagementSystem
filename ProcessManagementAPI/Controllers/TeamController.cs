@@ -21,12 +21,12 @@ namespace ProcessManagementAPI.Controllers
         /// <summary>
         /// Add Team
         /// </summary>
-        /// <param name="createTeamInput"></param>
+        /// <param name="name"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> AddTeam(CreateTeamInput createTeamInput)
+        public async Task<IActionResult> Create(string name)
         {
-            await ServiceFactory.TeamService.CreateAsync(createTeamInput);
+            await ServiceFactory.TeamService.CreateAsync(name);
 
             return Ok("Team has been successfully created");
         }

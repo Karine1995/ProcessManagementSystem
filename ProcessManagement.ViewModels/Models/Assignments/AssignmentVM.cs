@@ -1,8 +1,8 @@
-﻿using ProcessManagement.DTOs.Infrastructure;
+﻿using ProcessManagement.ViewModels.Infrastructure;
 
-namespace ProcessManagement.DTOs.Models
+namespace ProcessManagement.ViewModels.Models.Assignments
 {
-    public class AssignmentDTO : BaseDTO
+    public class AssignmentVM : BaseViewModel
     {
         public long Id { get; set; }
 
@@ -13,8 +13,8 @@ namespace ProcessManagement.DTOs.Models
         public string Description { get; set; }
 
         public int CreatedById { get; set; }
-        
-        public int AssigneeId { get; set; } 
+
+        public int AssigneeId { get; set; }
 
         public int ProjectId { get; set; }
     }
